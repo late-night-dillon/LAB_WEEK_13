@@ -1,0 +1,44 @@
+1. Mengapa MVVM penting? File mana yang termasuk Model, View, dan ViewModel?
+
+MVVM penting karena memisahkan UI dan logika bisnis, sehingga:
+- Kode lebih mudah diubah, dirawat, dan dites.
+- Perubahan UI tidak mengganggu logika data, dan sebaliknya.
+
+Di project LAB_WEEK_13:
+- Model: Movie.kt, MovieDao.kt, MovieDatabase.kt, MovieService.kt, MovieRepository.kt
+- View: MainActivity.kt, file layout XML (activity_main.xml, item_movie.xml), MovieAdapter.kt, RecyclerViewBinding.kt
+- ViewModel: MovieViewModel.kt
+
+
+2. Di Part 1, mengapa Data Binding lebih efisien daripada cara biasa?
+
+- Mengurangi kode boilerplate (tidak perlu findViewById).
+- Data dari ViewModel bisa langsung di-bind ke View di XML (misalnya app:list="@{viewModel.popularMovies}").
+- Perubahan data otomatis meng-update UI.
+- Kode di Activity/Fragment jadi lebih sedikit dan lebih rapi.
+
+
+3. Di Part 2, mengapa Singleton Pattern penting?
+
+- Memastikan hanya ada satu instance MovieDatabase di seluruh aplikasi.
+- Menghindari pembuatan database berulang yang berat dan boros resource.
+- Mengurangi risiko race condition dan inkonsistensi data saat diakses dari banyak thread.
+
+
+4. Di Part 2 & 3, mengapa Repository Pattern penting?
+
+- Menjadi lapisan tengah antara API dan Room, sehingga View/ViewModel tidak perlu tahu sumber data (API atau database).
+- Memudahkan sinkronisasi data API ↔ database lokal.
+- Mendukung offline (saat tidak ada internet, data diambil dari Room).
+- Membuat arsitektur lebih rapi dan mudah diubah (cukup ubah Repository, bukan UI).
+
+
+5. Di Part 3, selain WorkManager, apa cara lain untuk me-refresh database?
+
+Beberapa alternatif:
+- User melakukan refresh manual (pull-to-refresh atau tombol refresh).
+- Refresh setiap kali Activity/Fragment tertentu dibuka.
+- Menggunakan AlarmManager atau Service untuk menjadwalkan tugas background.
+- Menggunakan push notification (misalnya FCM) untuk memberi tahu saat ada data baru.
+
+Namun WorkManager lebih direkomendasikan karena mendukung tugas terjadwal yang andal, tetap jalan walau app ditutup/restart, dan mengikuti aturan sistem (hemat baterai, Doze mode).
