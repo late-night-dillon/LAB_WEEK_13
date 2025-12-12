@@ -1,58 +1,51 @@
-# LAB_WEEK_12 – Movie List App (Coroutines & Flow)
+# LAB_WEEK_13 – Architecture Patterns
 
-Mobile app sederhana untuk menampilkan daftar film populer menggunakan **The Movie Database (TMDB) API**.  
-Project ini dibuat sebagai bagian dari **LAB Week 12 – Coroutines & Flow** (MAP 2023/2024).
+Project ini adalah lanjutan dari LAB_WEEK_12 untuk modul **Architecture Patterns** pada mata kuliah **Mobile Application Programming**. Aplikasi menampilkan daftar film populer dari TMDB API dan menerapkan:
 
-Aplikasi dibangun secara bertahap dalam 3 commit utama:
+- **MVVM (Model–View–ViewModel)**
+- **Data Binding**
+- **Repository Pattern + Room**
+- **WorkManager**
 
-1. **Commit No. 1 – Init template**  
-2. **Commit No. 2 – Building app with coroutines**  
-3. **Commit No. 3 – Migrating to Flow (StateFlow) + Data Filtering**
+## Arsitektur Singkat
 
----
+- **Model (Data Layer)**
+  - `Movie.kt` (Entity)
+  - `MovieDao.kt`, `MovieDatabase.kt` (Room)
+  - `MovieService.kt` (Retrofit API)
+  - `MovieRepository.kt` (Repository, mengelola API + Room)
 
-## Tech Stack
+- **View (UI Layer)**
+  - `MainActivity.kt`
+  - `activity_main.xml` + layout item
+  - `MovieAdapter.kt`
+  - `RecyclerViewBinding.kt` (BindingAdapter)
 
-- **Kotlin**
-- **AndroidX**
-- **Coroutines** (`kotlinx.coroutines`)
-- **Retrofit** + **Moshi Converter**
-- **StateFlow** (Kotlin Flow)
-- **RecyclerView + GridLayoutManager**
-- **Glide** (image loading)
-
----
+- **ViewModel**
+  - `MovieViewModel.kt`
 
 ## Fitur Utama
 
-- Menampilkan **daftar film populer** dari TMDB.
-- Menampilkan **detail film** ketika item di klik (judul, tanggal rilis, overview, poster).
-- Menggunakan:
-  - **Coroutines** untuk network call non-blocking.
-  - **Flow / StateFlow** untuk streaming data ke UI.
-- **Filtering & sorting**:
-  - Hanya film dengan `release_date` yang mulai dengan **tahun berjalan**.
-  - Diurutkan **descending berdasarkan popularity**.
+- Mengambil daftar film populer dari TMDB API.
+- Menyimpan data film ke database lokal menggunakan Room (cache, bisa offline).
+- Menampilkan data dengan RecyclerView menggunakan Data Binding.
+- Menyegarkan data film secara periodik (setiap 1 jam) dengan WorkManager.
 
----
+## Commit Utama
 
-## Screenshot
+1. **Commit No. 1 – add data binding**  
+   Menambahkan Data Binding di layout dan MainActivity.
+  <img width="1919" height="1079" alt="commit1" src="https://github.com/user-attachments/assets/c2b005ec-1a5c-4061-98b5-6d8af7ed06c1" />
 
-Contoh struktur:
-
-- Halaman utama (grid daftar film)
-  <img width="1919" height="1015" alt="commit3 (1)" src="https://github.com/user-attachments/assets/60a826cb-95d0-4903-9276-16a9648b708c" />
-
-- Halaman detail film
-  <img width="1919" height="1023" alt="commit3 (2)" src="https://github.com/user-attachments/assets/a2f111af-34bb-4819-815c-2b339030929c" />
+2. **Commit No. 2 – update to Room**  
+   Menambahkan Room (Entity, DAO, Database) dan integrasi ke Repository.
+   <img width="1919" height="1079" alt="commit2 (2)" src="https://github.com/user-attachments/assets/e9ccaa73-8982-427a-9a65-efdb4ab3ec4e" />
+<img width="1919" height="1079" alt="commit2 (1)" src="https://github.com/user-attachments/assets/8e46aabf-0b17-4bbc-938a-238e57af281c" />
 
 
----
-
-## Setup & Konfigurasi
-
-### 1. Clone repository
-
-```bash
-git clone https://github.com/<username>/<repo-name>.git
-cd <repo-name>
+4. **Commit No. 3 – update to WorkManager**  
+   Menambahkan MovieWorker dan penjadwalan PeriodicWorkRequest di MovieApplication.
+   <img width="1919" height="1038" alt="commit3" src="https://github.com/user-attachments/assets/5ca05fc9-d88e-48c2-b9fe-e96038c3ed0e" />
+  
+6. **Commit No. 4 – assignment**  
+   Menambahkan file `LAB_WEEK_13.txt` berisi jawaban pertanyaan modul.
