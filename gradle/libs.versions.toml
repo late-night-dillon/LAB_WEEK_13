@@ -21,8 +21,10 @@ recyclerview = "1.4.0"
 retrofit = "3.0.0"
 baselibrary = "3.2.0-alpha11"
 room = "2.6.1"
+work = "2.9.0"
 
 [libraries]
+androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-ktx     = { module = "androidx.room:room-ktx",     version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
